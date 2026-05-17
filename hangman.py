@@ -53,24 +53,48 @@ wordlist = load_words()
 
 def is_word_guessed(secret_word, letters_guessed):
     secret1=list(secret_word)
+    unique=list(dict.fromkeys(secret1))
+    
     count=0
-    if secret1==letters_guessed:
+    for x in letters_guessed:
+        for y in unique:
+            if y==x:
+                count+=1
+    
+    length=len(unique)
+
+    if length==count:
         return False
     else:
         return True
 
+    
+
 
 
 def get_guessed_word(secret_word, letters_guessed):
-    length=len(secret_word)
-    i=[]
-    j=0
-    while j<length:
-        i.append("_")
-        j=j+1
-    for x in i:
-        print(x,end=" ")
+    index=[]
+    letters=[]
+    secret1=list(secret_word)
+    for x in letters_guessed:
+        for y,z in enumerate(secret1):
+            if z==x:
+                index.append(y)
+                letters.append(z)
+    print("")
+    for x,y in enumerate(secret1):
+        run=False
+        for e,z in enumerate(index):
+            if x==z:
+                print(letters[e],end=" ")
+                run=True
+        if run==True:
+            pass
+        else:
+            print("_",end=" ")
     print("\n")
+    
+        
 
 
 
@@ -90,7 +114,7 @@ def get_available_letters(letters_guessed):
 def hangman(secret_word):
     print("\n\tWelcome to the game 'HANGMAN'.\t\n")
     print(secret_word)
-    print("\nThe word has been guessed!")
+    print("\nThe word has been choosen!")
     length=len(secret_word)
     print("\nHINT:The word is ",length," characters long!\n")
     
@@ -115,7 +139,7 @@ def hangman(secret_word):
               warnings=warnings-1
               print("Total Warnings :",warnings)
               matchalpha=1
-      
+
       digits=string.digits
       num=list(digits)
       punt=string.punctuation
@@ -136,7 +160,7 @@ def hangman(secret_word):
               matchnum=1
 
       if warnings==0:
-          print("\nWarnings lost. \tYou LOST!\t")
+          print("\nWarnings lost. \n\tYou LOST!\t\n")
           break
     
       if matchalpha==1:
@@ -146,27 +170,32 @@ def hangman(secret_word):
       if matchpun==1:
           continue
       print("Character Entered :",user)
-      lettersguessed.append(user)
-      print(lettersguessed)
+      
 
       index=[]
       secret1=list(secret_word)
       for x,y in enumerate(secret1):
           if y==user:
               index.append(x)
-      print(index)
       
       if index==[]:
           print("Wrong Guess!.\nGuess Deducted.")
           guess=guess-1
           print("\nGuess:",guess)
-      
+      else:
+          lettersguessed.append(user)
+          print(lettersguessed)
+          get_guessed_word(secret_word,lettersguessed)
+    
       if guess==0:
-          print("Guesses lost. \tYou LOST!\t")
+          print("Guesses lost. \n\tYou LOST!\t\n")
           break
-
+      
       get_available_letters(lettersguessed)
       n=is_word_guessed(secret_word,lettersguessed)
+    
+    if n==False:
+        print("\n\tCongratulations! You WON!\t\n")
       
 
 
