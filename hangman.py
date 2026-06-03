@@ -194,14 +194,6 @@ def hangman(secret_word):
       
 
 
-# When you've completed your hangman function, scroll down to the bottom
-# of the file and uncomment the first two lines to test
-#(hint: you might want to pick your own
-# secret_word while you're doing your own testing)
-
-
-# -----------------------------------
-
 
 
 
@@ -250,12 +242,6 @@ def hangman_with_hints(secret_word):
     # FILL IN YOUR CODE HERE AND DELETE "pass"
     pass
 
-
-
-# When you've completed your hangman_with_hint function, comment the two similar
-# lines above that were used to run the hangman function, and then uncomment
-# these two lines and run this file to test!
-# Hint: You might want to pick your own secret_word while you're testing.
 
 
 if __name__ == "__main__":
